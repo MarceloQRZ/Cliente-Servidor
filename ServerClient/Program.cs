@@ -41,7 +41,7 @@ class Program
                 string Verification = Checks(tamanho);
 
                 //**********RESPOSTA A SER ENVIADO PARA O CLIENTE**********
-                byte[] imprime = Encoding.UTF8.GetBytes("Numero gerado: " + Gerado + "\nO numero é: " + Verification + "\n");
+                byte[] imprime = Encoding.UTF8.GetBytes("Numero gerado: " + Gerado);
                 stream.Write(imprime, 0, imprime.Length);
             }
             else
