@@ -11,22 +11,23 @@ class Program
         int Door = 5000;
 
         TcpListener listener = new TcpListener(IPAddress.Any, Door);
-        //Inicia o receptor
+        
+        //Iniciar o receptor
         listener.Start();
 
-        Console.WriteLine("O Servidor eniciou através da porta {0} \n", Door);
+        Console.WriteLine("O Servidor iniciou através da porta {0} \n", Door);
 
-        //Loop para aceitar a nonexão contínua do cliente
+        //Loop para aceitar a conexão contínua do cliente
         while (true)
         {
             //Mantém o programa bloqueado até que o cliente estabeleça conexão
             TcpClient client = listener.AcceptTcpClient();
             Console.WriteLine("Conexão recebida da porta {0}", client.Client.RemoteEndPoint);
 
-            //Obtem os dados que provem do cliente
+            //Obtém os dados que provém do cliente
             NetworkStream stream = client.GetStream();
 
-            //Ler a mensagem enviada pelo cliente, armazena num buffer de bytes e converte em str
+            //Lê a mensagem enviada pelo cliente, armazena em um buffer de bytes e converte em string
             byte[] buffer = new byte[1024];
             int bytes = stream.Read(buffer, 0, buffer.Length);
             string data = Encoding.UTF8.GetString(buffer, 0, bytes);

@@ -4,7 +4,6 @@ using System.Threading;
 
 class Program
 {
-
     static void Main()
     {
         string Ip = "127.0.0.1";
@@ -40,19 +39,17 @@ class Program
         string Ip = configuration.Ip;
         int Door = configuration.Door;
 
-        //instancia uma conexão com o cliente (IP) na atravez da poarta (Door)
+        //instancia uma conexão com o cliente (IP) através da porta (Door)
         TcpClient client = new TcpClient(Ip, Door);
 
         NetworkStream stream = client.GetStream();
 
-        var time = new System.Timers.Timer(10000);
-
-
         byte[] data = Encoding.UTF8.GetBytes(Generate());
-        //Envia a mensagem para o servidor com os parametros (array, indice inicial, tamanho dos dados)
+
+        //Envia a mensagem para o servidor com os parâmetros (array, indice inicial, tamanho dos dados)
         stream.Write(data, 0, data.Length);
 
-        //é criado um buffer de bytes para armazenar a resposta do servidor
+        //cria um buffer de bytes para armazenar a resposta do servidor
         data = new byte[1024];
         int bytes = stream.Read(data, 0, data.Length);
         string response = Encoding.UTF8.GetString(data, 0, bytes);
